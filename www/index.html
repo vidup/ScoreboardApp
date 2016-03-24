@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title></title>
+
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+	<link href="css/ionic.app.css" rel="stylesheet">
+	-->
+
+	<!-- ionic/angularjs js -->
+	<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+	<script src="cordova.js"></script>
+
+	<script src="js/app.js"></script>
+</head>
+	<body ng-app="soundboard">
+
+	<ion-pane ng-controller="DutchCtrl">
+		<ion-header-bar class="bar-positive" align-title="center">
+
+			<div class="buttons">
+				<button ng-click="model.showDelete=!model.showDelete; model.showAdd=false" class="button button-icon ion-trash-a">
+				</button>
+			</div>
+
+			<h1 class="title">Dutch</h1>
+
+			<div class="buttons">
+				<button ng-click="resetPoints();" class="button button-icon ion-ios-reload">
+				</button>
+			</div>
+
+		</ion-header-bar>
+		<ion-content>
+
+			<ion-list show-delete="model.showDelete">
+				<ion-item class="item-thumbnail-left item-icon-right item-remove-animate" ng-repeat="player in model.players | orderBy: &apos;ranking&apos;" on-hold="selectPlayer($index);">
+					<img ng-src="{{player.image}}" alt="">
+					<h1>{{player.name}} : {{player.score}}</h1>
+					<ion-delete-button ng-click="deletePlayer(player)" class="ion-trash-a">
+					</ion-delete-button>
+					<form>
+						<label class="item item-input">
+						  <input type="number" ng-model="player.add">
+						</label>
+					</form>
+				</ion-item>
+			</ion-list>
+		</ion-content>
+
+		<ion-footer-bar align-title="center" class="bar-stable hide-on-keyboard-open">
+			<div class="buttons">
+				<button ng-click="addPlayer()" class="button button-icon ion-plus-round">
+					Add Player
+				</button>
+				<p class="title"></p>
+				<button ng-click="nextRound();" class="button button-icon ion-checkmark-round">
+					Next Round
+				</button>
+			</div>
+		</ion-footer-bar>
+		
+	</ion-pane>
+	</body>
+</html>
